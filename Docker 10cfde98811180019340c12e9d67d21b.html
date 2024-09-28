@@ -1,0 +1,722 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Docker </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(249, 228, 188, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="10cfde98-8111-8001-9340-c12e9d67d21b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/document_gray.svg"/></div><h1 class="page-title">Docker </h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-status"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesStatus"><path d="M8.75488 1.02344C8.75488 0.613281 8.41309 0.264648 8.00293 0.264648C7.59277 0.264648 7.25098 0.613281 7.25098 1.02344V3.11523C7.25098 3.51855 7.59277 3.86719 8.00293 3.86719C8.41309 3.86719 8.75488 3.51855 8.75488 3.11523V1.02344ZM3.91504 5.0293C4.20215 5.31641 4.69434 5.32324 4.97461 5.03613C5.26855 4.74902 5.26855 4.25684 4.98145 3.96973L3.53906 2.52051C3.25195 2.2334 2.7666 2.21973 2.47949 2.50684C2.19238 2.79395 2.18555 3.28613 2.47266 3.57324L3.91504 5.0293ZM10.9629 4.01758C10.6826 4.30469 10.6826 4.79688 10.9697 5.08398C11.2568 5.37109 11.749 5.36426 12.0361 5.07715L13.4854 3.62793C13.7725 3.34082 13.7725 2.84863 13.4785 2.55469C13.1982 2.27441 12.7061 2.27441 12.4189 2.56152L10.9629 4.01758ZM15.0234 8.78906C15.4336 8.78906 15.7822 8.44727 15.7822 8.03711C15.7822 7.62695 15.4336 7.28516 15.0234 7.28516H12.9385C12.5283 7.28516 12.1797 7.62695 12.1797 8.03711C12.1797 8.44727 12.5283 8.78906 12.9385 8.78906H15.0234ZM0.975586 7.28516C0.56543 7.28516 0.223633 7.62695 0.223633 8.03711C0.223633 8.44727 0.56543 8.78906 0.975586 8.78906H3.07422C3.48438 8.78906 3.83301 8.44727 3.83301 8.03711C3.83301 7.62695 3.48438 7.28516 3.07422 7.28516H0.975586ZM12.0361 10.9902C11.749 10.71 11.2568 10.71 10.9629 10.9971C10.6826 11.2842 10.6826 11.7764 10.9697 12.0635L12.4258 13.5127C12.7129 13.7998 13.2051 13.793 13.4922 13.5059C13.7793 13.2256 13.7725 12.7266 13.4854 12.4395L12.0361 10.9902ZM2.52051 12.4395C2.22656 12.7266 2.22656 13.2188 2.50684 13.5059C2.79395 13.793 3.28613 13.7998 3.57324 13.5127L5.02246 12.0703C5.31641 11.7832 5.31641 11.291 5.03613 11.0039C4.74902 10.7168 4.25684 10.71 3.96973 10.9971L2.52051 12.4395ZM8.75488 12.9658C8.75488 12.5557 8.41309 12.207 8.00293 12.207C7.59277 12.207 7.25098 12.5557 7.25098 12.9658V15.0576C7.25098 15.4609 7.59277 15.8096 8.00293 15.8096C8.41309 15.8096 8.75488 15.4609 8.75488 15.0576V12.9658Z"></path></svg></span>Status</th><td><span class="status-value select-value-color-red"><div class="status-dot status-dot-color-red"></div>Rough</span></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/looped-square_gray.svg" style="width:14px;height:14px"/></span>Areas</th><td><a href="https://www.notion.so/WEB-DEV-78f696d786374cdb84a35c38ad2294f9?pvs=21"><img class="icon" src="https://www.notion.so/icons/clover-four-leaf_gray.svg"/>WEB DEV.</a></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/star_gray.svg" style="width:14px;height:14px"/></span>Favourite</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/archive_gray.svg" style="width:14px;height:14px"/></span>Archive</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created time</th><td><time>@September 26, 2024 5:01 AM</time></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Last edited time</th><td><time>@September 28, 2024 12:59 PM</time></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/book-closed_gray.svg" style="width:14px;height:14px"/></span> Notebook</th><td><a href="https://www.notion.so/DEVOPS-10ffde988111800eae68f97438ec90ce?pvs=21"><img class="icon" src="https://www.notion.so/icons/book-closed_gray.svg"/>DEVOPS</a></td></tr></tbody></table></header><div class="page-body"><h3 id="10ffde98-8111-8073-abaf-fbc754ef7725" class="">References</h3><p id="10ffde98-8111-80c5-960f-c1a7f8aa9b6c" class=""><a href="https://youtu.be/17Bl31rlnRM?si=mhJArBUSm6NlHHOm">https://youtu.be/17Bl31rlnRM?si=mhJArBUSm6NlHHOm</a> - video tutorial </p><p id="10ffde98-8111-805d-aa95-f3a12129a782" class=""><a href="https://docs.docker.com/">https://docs.docker.com/</a> - docker docs </p><p id="10ffde98-8111-80de-803d-ea99a808b5ec" class=""><a href="https://opencontainers.org/">https://opencontainers.org/</a></p><h1 id="10ffde98-8111-806e-ba80-e93df48f1ab0" class="">Why we are using it ??</h1><h2 id="10ffde98-8111-80c5-a3c0-e7c211ef99fb" class="">Before Docker</h2><p id="10ffde98-8111-808d-9e74-fdc6a1806dbb" class="">long time ago <br/>people used to run one application per server , so if you wanted to have a new application you would need a new server . so not good of efficient <br/></p><p id="10ffde98-8111-8025-b9ef-cacb26dac5e0" class="">
+</p><h2 id="10ffde98-8111-808e-92a4-fd5a79300c6b" class="">Virtual Machines</h2><p id="10ffde98-8111-80cc-aa20-d870a64f9df2" class="">
+</p><p id="10ffde98-8111-80f7-a012-d439f6705779" class="">This Problem was solved by <mark class="highlight-yellow_background">VMware</mark>- by making virtual machines </p><p id="10ffde98-8111-8073-9bd5-fc5d886cb990" class="">it made <mark class="highlight-yellow_background">multiple machines one server</mark>   </p><p id="10ffde98-8111-800a-9fcb-c31a99038be1" class="">
+</p><p id="10ffde98-8111-80ac-83e2-f1279d143335" class="">There was a problem with this , that is VM requires its own Operating System . Better that one application per server but still problematic </p><p id="10ffde98-8111-80c5-8aa9-cc1554102e46" class="">the problems were </p><ol type="1" id="10ffde98-8111-8030-8642-ce734f9f44b6" class="numbered-list" start="1"><li>Seperate O.S </li></ol><ol type="1" id="10ffde98-8111-801a-812f-e60dc66d920d" class="numbered-list" start="2"><li>Dependencies </li></ol><ol type="1" id="10ffde98-8111-80f0-a4ba-e2c5e12edcd9" class="numbered-list" start="3"><li>Not working on everyone’s machine </li></ol><p id="10ffde98-8111-80ad-919f-d1c88e7848ab" class="">
+</p><h3 id="10ffde98-8111-803f-9772-d451e7bbd587" class="">Solution of virtual machine problem (Containers)</h3><p id="10ffde98-8111-80b6-a5fb-f84ce7fb3a27" class="">A way in which we have one application which will run everything not many VM’s  </p><p id="10ffde98-8111-80e4-a682-f7153fe210d0" class="">this problem is solved by <mark class="highlight-yellow_background">Containers</mark>  </p><figure id="10ffde98-8111-8031-bd68-de8febdace69" class="image"><a href="image.png"><img style="width:490.7045593261719px" src="image.png"/></a></figure><p id="10ffde98-8111-8008-b0d8-e84334cf2fbd" class="">
+</p><figure id="10ffde98-8111-80c4-a0d4-f554e564bd48" class="image"><a href="image%201.png"><img style="width:493.977294921875px" src="image%201.png"/></a></figure><p id="10ffde98-8111-80ce-a7bf-da6cfca65aea" class="">
+</p><ul id="10ffde98-8111-8055-b737-e875dba234f6" class="bulleted-list"><li style="list-style-type:disc">Hypervisor is used to create multiple machines on a host operating system and it manages the virtual machine  </li></ul><ul id="10ffde98-8111-80b0-bdff-c4fe8b129974" class="bulleted-list"><li style="list-style-type:disc">In VM you use multiple O.S to run multiple app’s </li></ul><ul id="10ffde98-8111-801a-95a9-d0a7d1390c14" class="bulleted-list"><li style="list-style-type:disc">In Containers you use single O.S to run multiple app’s using container engine </li></ul><p id="10ffde98-8111-80ac-be67-d6be61a39e10" class="">
+</p><h2 id="10ffde98-8111-80db-bba4-e98da4261c86" class="">Containers </h2><p id="10ffde98-8111-8099-80d9-fed046863416" class="">Windows , you can install <mark class="highlight-yellow_background">docker desktop</mark>   + <mark class="highlight-yellow_background">WSL</mark></p><ul id="10ffde98-8111-808b-a5eb-d6d0f73b0774" class="bulleted-list"><li style="list-style-type:disc">If a windows application is containerized in a windows based docker it will not run on  a linux based docker. </li></ul><p id="10ffde98-8111-809c-aefe-f562d9bec7ea" class="">
+</p><p id="10ffde98-8111-80e3-9554-f737e391e5f0" class="">
+</p><h1 id="10ffde98-8111-80d2-859e-fe330f249a80" class="">Docker </h1><p id="10ffde98-8111-80cf-889e-c77c02e21856" class="">docker is helping us to run our application in isolated env. in a container </p><p id="10ffde98-8111-80d1-b2f2-ea87d6024a65" class="">this container in itself in an isolated environment , the container will itself doesn’t know what is happening outside , </p><p id="10ffde98-8111-80e7-875f-fd086cecbb03" class="">
+</p><p id="10ffde98-8111-80cf-83c3-d79afdc217d1" class="">Docker contains a few part</p><h2 id="10ffde98-8111-80fa-8bdb-c4ba377f279b" class="">Runtine</h2><figure id="10ffde98-8111-80e9-876d-ea1414e15b6a" class="image"><a href="image%202.png"><img style="width:249px" src="image%202.png"/></a></figure><p id="10ffde98-8111-80de-9dbd-c45b313e5ecd" class="">
+</p><p id="10ffde98-8111-8085-b87f-f423485ecd79" class="">It basically allows us to start and stop the container </p><p id="10ffde98-8111-8021-9345-cb7d1b76e790" class="">there are two types of run time </p><ol type="1" id="10ffde98-8111-80d2-83e8-f99c194133c6" class="numbered-list" start="1"><li>run -c : works with os to start and stop to container </li></ol><ol type="1" id="10ffde98-8111-809b-aa67-cc78b1725ca9" class="numbered-list" start="2"><li>containerd : managing run c , how to connect the container with the internet , fetch data </li></ol><p id="10ffde98-8111-80a1-9f0a-d342ab38c364" class="">
+</p><h2 id="10ffde98-8111-805f-b522-f14a81a12957" class="">Engine</h2><p id="10ffde98-8111-802a-97c4-dda851ca843b" class="">is something we use to interact with docker server </p><figure id="10ffde98-8111-801e-8a59-f8af0b5ac6b2" class="image"><a href="image%203.png"><img style="width:445.9886474609375px" src="image%203.png"/></a></figure><p id="10ffde98-8111-8019-914c-d63e503fa8d5" class="">uses client server architecture </p><p id="10ffde98-8111-803b-872e-e4cf621ff422" class="">
+</p><div><h2 id="10ffde98-8111-803c-b2a6-c7d6e6991627" class="">Orchestration</h2></div><p id="10ffde98-8111-801b-90a0-e71cf0697b0c" class="">suppose you have 10000 container and you want to scale it to 20000 application </p><p id="10ffde98-8111-80f6-b1f2-fd0cd7a1849b" class="">or if 500 got ruined and you want to fix that </p><p id="10ffde98-8111-8037-90a2-c08789fb9583" class="">or if your containers are running in version 1.0 and you want to make it to version 2.0 </p><p id="10ffde98-8111-8050-9509-fcaea22442c0" class="">this is very time consuming manually so orchestration is used (kubernetes is provides this functionality )</p><p id="10ffde98-8111-80d9-9b49-c5e323481eae" class="">
+</p><p id="10ffde98-8111-80a3-a89d-ca756f3d3faf" class="">
+</p><h2 id="10ffde98-8111-808a-839b-fae3e4e53d13" class="">Container image / docker image </h2><p id="8c3d6047-c844-40f0-afc3-2d72ce5ef313" class="">A Docker image is a lightweight, standalone, and executable package that includes everything needed to run a piece of software, including the code, runtime, system tools, libraries, and settings. It serves as a blueprint for creating Docker containers.</p><p id="6e24114f-0ec6-4601-8511-e194f415c98b" class="">Key points about Docker images:</p><ul id="39500e73-f7fa-4526-be93-085e3e7bb2bd" class="bulleted-list"><li style="list-style-type:disc">Images are read-only templates used to create containers</li></ul><ul id="40306da5-5f88-4b57-82d1-e91dd76e6e8f" class="bulleted-list"><li style="list-style-type:disc">They are built from a set of instructions called a <mark class="highlight-yellow_background">Dockerfile</mark></li></ul><ul id="63947d4c-dcee-4786-bd8f-e93a7e830f12" class="bulleted-list"><li style="list-style-type:disc">Images can be stored in a Docker registry (like Docker Hub) and shared</li></ul><ul id="b88638cd-58a5-4a89-af3b-74a9976054d0" class="bulleted-list"><li style="list-style-type:disc">They are composed of multiple layers, each representing an instruction in the Dockerfile</li></ul><ul id="9d126264-bf11-43de-9b26-70861087ae70" class="bulleted-list"><li style="list-style-type:disc">Images allow for consistent and reproducible deployments across different environments</li></ul><p id="b3a31acb-b163-4598-925f-f3dbbbcc1e76" class="">When you run a Docker image, it becomes a container. Multiple containers can be created from the same image, each running in isolation.</p><p id="10ffde98-8111-8039-8766-f4618cf38bde" class="">you run docker file → you get image , you run image → you get container </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="10ffde98-8111-8029-8be9-edd2e42da3ed"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="10ffde98-8111-8005-966a-e5cf2c13d96f" class="">you can say that an image is a class and the container you get is an object , docker file contains list of instructions (kind of )</p></div></figure><p id="10ffde98-8111-800e-aa67-fc61fc0c5bed" class="">
+</p><p id="78346a90-1232-4ffa-894a-217e2b8ef801" class="">benifits of containerization from AI </p><p id="10ffde98-8111-805d-8e40-dc537537106d" class="">When you containerize an application, users benefit in several ways:</p><ol type="1" id="10ffde98-8111-802b-90e0-d7ba17434fc4" class="numbered-list" start="1"><li><strong>Consistency</strong>: The application runs the same way in any environment, whether it&#x27;s on your local machine, a staging server, or in production. This eliminates compatibility issues.</li></ol><ol type="1" id="10ffde98-8111-80db-bdb7-cc2b483b6454" class="numbered-list" start="2"><li><strong>Isolation</strong>: Each container is isolated from others, so different applications or versions can run on the same host without conflicts.</li></ol><ol type="1" id="10ffde98-8111-8047-ab95-d8e18d970171" class="numbered-list" start="3"><li><strong>Simplified Deployment</strong>: Users don’t need to install Node.js or any other dependencies. They just need a container runtime, making it easier to deploy applications on various platforms.</li></ol><ol type="1" id="10ffde98-8111-801f-bdde-ddf44ac8105b" class="numbered-list" start="4"><li><strong>Scalability</strong>: Containers can be easily scaled up or down based on demand, allowing for efficient resource use.</li></ol><ol type="1" id="10ffde98-8111-8064-ad80-f83bf0501235" class="numbered-list" start="5"><li><strong>Portability</strong>: The application can be moved between different environments (like cloud services or local servers) without modification.</li></ol><p id="10ffde98-8111-80c8-89bb-fb4f9f9b2f31" class="">Overall, containerization simplifies the development, deployment, and management processes, making it easier for users to run applications without worrying about underlying dependencies.</p><p id="10ffde98-8111-80a5-a64a-c17302967de7" class="">
+</p><figure id="10ffde98-8111-8010-a20e-c82c6b6bb120" class="image"><a href="image%204.png"><img style="width:490.7159118652344px" src="image%204.png"/></a></figure><p id="10ffde98-8111-8010-9ccb-c8b9db7c21fe" class="">
+</p><p id="10ffde98-8111-8061-b68e-fca59d4cfaf9" class="">
+</p><h1 id="10ffde98-8111-80fe-8c9f-d4b6c40a8d4f" class="">How a docker image works </h1><p id="10ffde98-8111-809a-9ec0-ec4c667fd966" class="">if we are running a command on mongo db and if the container doesn’t communicate out side container how is it running without an os <br/><br/>well the answer to that is that a container also contains the o.s dependencies .<br/></p><p id="10ffde98-8111-8069-82b4-db7d332632ae" class="">
+</p><p id="10ffde98-8111-806f-bd5a-f04352cc8281" class="">
+</p><h1 id="10ffde98-8111-8049-a3cf-cb56e2640da6" class="">Commands </h1><ul id="10ffde98-8111-8056-8d77-e5919ceb99e7" class="bulleted-list"><li style="list-style-type:disc">docker run hello-world <ul id="10ffde98-8111-8002-8cdf-c5936e13f33b" class="bulleted-list"><li style="list-style-type:circle">docker - means we are working with docker cli </li></ul><ul id="10ffde98-8111-8071-80ab-c9366e1b3ac7" class="bulleted-list"><li style="list-style-type:circle">run - you run an image to create a container </li></ul><ul id="10ffde98-8111-801e-b88d-d2553c9324dc" class="bulleted-list"><li style="list-style-type:circle">hello-world - image name </li></ul></li></ul><ul id="10ffde98-8111-8056-831c-eda0379dbae9" class="bulleted-list"><li style="list-style-type:disc">docker pull mysql <ul id="10ffde98-8111-8022-a132-e959e72c9cc0" class="bulleted-list"><li style="list-style-type:circle">it will download image of mysql without running it </li></ul></li></ul><ul id="10ffde98-8111-8046-a588-e160a1f5d18c" class="bulleted-list"><li style="list-style-type:disc">docker images<ul id="10ffde98-8111-8095-811d-fca1c6499c03" class="bulleted-list"><li style="list-style-type:circle">shows you all the downloaded images </li></ul></li></ul><ul id="10ffde98-8111-806b-b417-f09be8af8aec" class="bulleted-list"><li style="list-style-type:disc">docker ps -a <ul id="10ffde98-8111-8059-99a1-de775ca627c4" class="bulleted-list"><li style="list-style-type:circle">shows all the stopped commands </li></ul></li></ul><ul id="10ffde98-8111-8046-a20c-d0f380350602" class="bulleted-list"><li style="list-style-type:disc">docker inspect ubuntu<ul id="10ffde98-8111-80e3-a032-ebd524bd0ed4" class="bulleted-list"><li style="list-style-type:circle">it gives all the information about that container </li></ul><ul id="10ffde98-8111-8045-b389-fcaa29ba2db1" class="bulleted-list"><li style="list-style-type:circle">container must be running </li></ul></li></ul><ul id="10ffde98-8111-805c-9570-e0f1823f8c0c" class="bulleted-list"><li style="list-style-type:disc">docker container prune -f<ul id="10ffde98-8111-8005-ad9a-db21fa860abd" class="bulleted-list"><li style="list-style-type:circle">it deletes all the stopped container </li></ul></li></ul><ul id="10ffde98-8111-80c7-ac3a-db8ee51a310f" class="bulleted-list"><li style="list-style-type:disc">docker images -q<ul id="10ffde98-8111-80f8-8367-d471e4b7a25b" class="bulleted-list"><li style="list-style-type:circle">it gives the id’s of all the images you have </li></ul></li></ul><ul id="10ffde98-8111-805d-a7af-c10bb37a4772" class="bulleted-list"><li style="list-style-type:disc">docker rmi $(docker images -q)<ul id="10ffde98-8111-8067-bf75-c374ed421637" class="bulleted-list"><li style="list-style-type:circle">remove all images at once </li></ul></li></ul><p id="10ffde98-8111-8006-8e0f-e2380b244ee5" class="">
+</p><h2 id="10ffde98-8111-804b-bb2c-c69224ae0bcd" class="">Accessing a container </h2><p id="10ffde98-8111-804d-8e1e-cdd52370478a" class="">docker run -d -p 8080:80 nginx</p><p id="10ffde98-8111-80d4-8428-e0b28983e854" class="">you are forwading it in a local port 8080</p><p id="10ffde98-8111-8053-8b03-f2292b6aea64" class="">
+</p><h2 id="10ffde98-8111-80d3-9748-feb86473b6e9" class="">how to edit an existing image an create a new image</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="10ffde98-8111-80a2-af96-c0ba77f19cc7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="10ffde98-8111-8038-8a04-db206169e1d3" class="">using commit messages<div class="indented"><p id="10ffde98-8111-80c9-b3c4-f08426afa3fd" class="">docker commit -m “msg “ container hex code  created image name </p></div></p></div></figure><p id="10ffde98-8111-80c4-953c-cb1eb3c6c66f" class="">
+</p><p id="10ffde98-8111-8059-a1cf-ec1b8e839921" class="">
+</p><p id="10ffde98-8111-8073-94a9-f684d38adbcf" class="">
+</p><h2 id="10ffde98-8111-806a-bbce-eb6b32325f20" class="">Layers</h2><figure id="10ffde98-8111-805d-8a4a-ee50ba151705" class="image"><a href="image%205.png"><img style="width:490.7045593261719px" src="image%205.png"/></a></figure><p id="10ffde98-8111-80fe-96d8-c70754cafcee" class="">
+</p><p id="10ffde98-8111-80d9-8f33-f1a20087e416" class="">Images are built in layers </p><p id="10ffde98-8111-803c-aebd-de0443bb46d9" class="">each layer is an immutable file, but is a collection of files and director</p><p id="10ffde98-8111-8067-9c5c-f6a9225c1e04" class="">
+</p><p id="63186609-4f32-49b1-85c8-938d6858ef20" class="">Layers in Docker are a key concept in how images are built and stored. Here&#x27;s a breakdown of how layers work:</p><ul id="4e1d76aa-efa3-4457-bf3c-97c1844cacd8" class="bulleted-list"><li style="list-style-type:disc">Each instruction in a Dockerfile typically creates a new layer</li></ul><ul id="1ce867fb-12b8-4016-a793-7de4724198ba" class="bulleted-list"><li style="list-style-type:disc">Layers are cached, which speeds up build times for subsequent builds</li></ul><ul id="a4742107-8bef-4be3-985b-f8dd9d3f89fd" class="bulleted-list"><li style="list-style-type:disc">When you change a layer, all downstream layers have to be recreated</li></ul><ul id="b82c8ef0-abf1-476c-85e5-34dce3475dc5" class="bulleted-list"><li style="list-style-type:disc">Layers are read-only; when a container runs, a read-write layer is added on top</li></ul><ul id="9268804d-4f41-42ca-bbad-c287e9058b28" class="bulleted-list"><li style="list-style-type:disc">Multiple images can share layers, saving disk space and network bandwidth</li></ul><p id="160755e2-8fd4-4f6c-a309-625babd65503" class="">The layered approach allows for efficient storage and transfer of images, as well as quick updates and rollbacks. It&#x27;s one of the reasons Docker is so lightweight and fast compared to traditional virtualization.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5e66dfa2-5ea3-4829-9d7c-585177403a48"><div style="width:100%"><p id="d67877a6-3971-43b8-9f84-099cad140290" class="">To view the layers of an image, you can use the command:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="87e64bc9-b2fc-4170-ac9c-9e82be59f70d" class="code"><code class="language-Bash">docker history image_name</code></pre></div></figure><p id="10ffde98-8111-8055-94cc-f96c6239a28f" class="">above explaination is given by AI</p><p id="10ffde98-8111-80db-ba43-d9593af6bf0c" class="">
+</p><p id="10ffde98-8111-802e-8eda-de08167b53cd" class="">but to sum it up </p><p id="10ffde98-8111-80e3-a438-f77155bf8c30" class="">there are files that share common images lets suppose ubuntu and mongo share a file a if you have downloaded ubuntu then mongo will take the file locally from your system and take other file form download </p><p id="10ffde98-8111-801c-b390-d7a17e51ed5c" class="">
+</p><h1 id="10ffde98-8111-80e7-8b40-c6bafdceee55" class="">How to create your own docker file </h1><p id="10ffde98-8111-8084-b54d-ca6f8cf1e9e6" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="10ffde98-8111-8088-aba7-e6ca7d5e05bd" class="code"><code class="language-Bash" style="white-space:pre-wrap;word-break:break-all">From Ubuntu 
+MAINTAINER harry pattain &lt;email&gt;
+RUN apt-get update
+CMD [&quot;echo&quot;, &quot;hello World&quot;]</code></pre><p id="10ffde98-8111-804d-91b7-fa29e7dd0b08" class="">
+</p><ul id="10ffde98-8111-809a-b4cd-e573c7ac2c04" class="bulleted-list"><li style="list-style-type:disc">touch Dockerfile (name convention big D and small f)</li></ul><ul id="10ffde98-8111-80c4-a6bf-e388389a2592" class="bulleted-list"><li style="list-style-type:disc">from ubuntu means the base image </li></ul><ul id="10ffde98-8111-8055-8a23-e923559dcdbd" class="bulleted-list"><li style="list-style-type:disc">maintainer info</li></ul><ul id="10ffde98-8111-800f-863d-e54e0076e161" class="bulleted-list"><li style="list-style-type:disc">run apt-get update - this will update the base image to latest verision</li></ul><ul id="10ffde98-8111-80cb-92f5-dfa18a2f3f7d" class="bulleted-list"><li style="list-style-type:disc">last is run CMD specifies what executable will run</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="10ffde98-8111-8053-af57-e98a875d6cd5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><p id="10ffde98-8111-8003-a95f-c9a6d31f68c6" class="">every single image has a base image </p></div></figure><p id="10ffde98-8111-80d0-93d3-f75de2ff50d3" class="">
+</p><h2 id="10ffde98-8111-80dd-88fc-f1e50856f70a" class="">To build images </h2><ul id="10ffde98-8111-8096-aad3-fcd6e8316e57" class="bulleted-list"><li style="list-style-type:disc">docker build -t myImage:1.01 (path to the docker file )”</li></ul><p id="10ffde98-8111-80e8-8495-f610f0426094" class="">
+</p><h1 id="10ffde98-8111-808b-8fe4-f30e95915de1" class="">Architecture of Docker Engine </h1><p id="10ffde98-8111-807b-a829-f63633f0a841" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
